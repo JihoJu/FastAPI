@@ -51,3 +51,22 @@ async def update_book(book_name: str, book_title: str, book_author: str):
 async def delete_book(book_name: str):
     del BOOKS[book_name]
     return f'{book_name} deleted.'
+
+
+# 1. Create a new read book function that uses query params instead of path params.
+@app.get("/assignment/")
+async def read_book_assignment(book_name: Optional[str] = None):
+    if book_name:
+        return BOOKS[book_name]
+    else:
+        return "Not exists"
+
+
+# 2. Create a new delete book function that uses query params instead of path params.
+@app.delete("/assignment/")
+async def delete_book(book_name: Optional[str] = None):
+    if book_name:
+        del BOOKS[book_name]
+        return f'{book_name} deleted'
+    else:
+        return "Not exists"
